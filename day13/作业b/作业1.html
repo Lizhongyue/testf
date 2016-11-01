@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		window.onload=function(){
+			var div1=document.getElementById("div1");
+			var zhen=false;
+			div1.onmousedown=function(evt){
+				evt=evt||window.event;
+				zhen=true;
+				div1.offy=evt.offsetY;
+				div1.offx=evt.offsetX;
+			}
+			document.onmouseup=function(){
+				zhen=false;
+				var d=new Date();
+				d.setDate(d.getDate()+10);
+				document.cookie="stepy="+div1.offsetTop+";expires="+d;
+				document.cookie="stepx="+div1.offsetLeft+";expires="+d;
+			}
+			document.onmousemove=function(ev){
+				ev=ev||window.event;
+				if(zhen){
+					div1.style.top=ev.clientY-div1.offy+"px";
+					div1.style.left=ev.clientX-div1.offx+"px";	
+				}
+			}
+			//再次进入页面对div定位
+			var arr=document.cookie.split("; ");
+			var n;
+			var m;
+			
+			for(var i=0;i<arr.length;i++){
+				if(arr[i].indexOf("stepy")!=-1){
+					n=i;
+				}else if(arr[i].indexOf("stepx")!=-1){
+					m=i;
+				}
+			}
+			div1.style.left=arr[m].split("=")[1]+"px";
+			div1.style.top=arr[n].split("=")[1]+"px";
+		}
+		</script>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+				background: #0f0;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1"></div>
+	</body>
+</html>

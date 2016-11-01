@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{width:200px;
+			   height:200px;
+			   background:red;
+			   position: absolute;
+			   cursor: pointer;}
+		</style>
+		<script src="js/fengzhuang.js"></script>
+		<script type="text/javascript">
+			
+			window.onload=function()
+			{
+				var div=document.getElementsByTagName("div")[0];
+				
+				div.flag=false;
+				if(getCookie("left"))
+				{
+				div.style.left=getCookie("left")+"px";
+				div.style.top=getCookie("top")+"px";
+				}
+				div.onmousedown=function(evt)
+				{
+					var evt=evt||window.event;
+					div.flag=true;
+					//div.offx=evt.offsetX;
+					//div.offy=evt.offsetY;
+					div.offx=evt.clientX-div.offsetLeft;
+					div.offy=evt.clientY-div.offsetTop;
+					
+				}
+				document.onmousemove=function(evt)
+				{
+					var evt=evt||window.event;
+					if(div.flag)
+					{
+					/*div.style.left=evt.clientX-div.offx+"px";
+					div.style.top=evt.clientY-div.offy+"px";*/
+					var left=evt.clientX-div.offx;
+					var top=evt.clientY-div.offy;
+					var maxleft=document.documentElement.clientWidth-div.offsetWidth;
+					var maxtop=document.documentElement.clientHeight-div.offsetHeight;
+					if(left<0)
+					{
+						left=0;
+					}
+					if(top<0)
+					{
+						top=0;
+					}
+					if(left>=maxleft)
+					{
+						left=maxleft;
+					}
+					if(top>=maxtop)
+					{
+						top=maxtop;
+					}
+					div.style.left=left+"px";
+					div.style.top=top+"px";
+					
+					
+					setCookie("left",left,10);
+					setCookie("top",top,10);
+					
+					
+					
+					
+					}
+				}
+				document.onmouseup=function()
+				{
+					div.flag=false;
+					/*var d=new Date();
+				d.setDate(d.getDate()+10);
+				document.cookie="stepy="+div.offsetTop+";expires="+d;
+				document.cookie="stepx="+div.offsetLeft+";expires="+d;*/
+				}
+				//再次进入页面对div定位
+				/*var arr=document.cookie.split("; ");
+			    var n;
+			    var m;
+			
+			  for(var i=0;i<arr.length;i++){
+				if(arr[i].indexOf("stepy")!=-1){
+					n=i;
+				}else if(arr[i].indexOf("stepx")!=-1){
+					m=i;
+				}
+			}
+			div.style.left=arr[m].split("=")[1]+"px";
+			div.style.top=arr[n].split("=")[1]+"px";*/
+				
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div></div>
+	</body>
+	<!--<script>
+	    function setCookie(name,value,n)
+	    {
+	       var d=new Date();
+	       d.setDate(d.getDate()+n);
+	       document.cookie=name+"="+value+";expires"+d+";path=/";
+	       console.log("set cookie is ok");
+	    }
+	    function getCookie(name)
+	    {
+	    	 var arr=document.cookie.split("; ");
+	    	 var n;
+	    	 for(var i=0;i<arr.length;i++)
+	    	 {
+	    	 	if(arr[i].indexOf(name)!=-1)
+	    	 	{
+	    	 		n=i;
+	    	 		break;
+	    	 	}
+	    	 	if(n!=undefined)
+	    	 	{
+	    	 	return arr[n].split("=")[1];
+	    	 	}
+	    	 }
+	     function delCookie(name,path)
+	     {
+	     	var d=new Date();
+	     	d.setDate(0);
+	     	document.cookie=name+"=0"+";expires="+d+";path="+path;
+	     	console.log("delete cookie "+name+" is ok!")
+	     }
+	     
+	    }
+	</script>-->
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#user{position:absolute;
+			     right:100px;
+			     top:50px;}
+		</style>
+		<script src="js/fengzhuang.js"></script>
+		<script type="text/javascript">
+			window.onload=function()
+			{
+				var div=document.getElementById("user");
+				if(getCookie("username"))
+				{
+					div.innerHTML="欢迎"+getCookie("username")+"光临,您上次登陆的时间是"+getCookie("loginTime");
+				}
+				 
+				
+			}
+			
+			
+			  
+		</script>
+			
+		</script>
+	</head>
+	<body>
+		<div id="user">欢迎登陆</div>
+	</body>
+</html>

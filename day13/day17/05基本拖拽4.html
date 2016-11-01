@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		  *{
+				padding:0;margin:0;
+			}
+			div{
+			  width:240px;
+				height:180px;
+				background:url(22.gif);
+				cursor:pointer;
+				border:1px solid red;
+				position:absolute;
+			}
+		</style>
+		<script ></script>
+	</head>
+	<body >
+
+	   <div>
+		   <input type="button" value="路径回放" id="back" />
+		 </div>
+
+	</body>
+	<script>
+      var div=document.getElementsByTagName("div")[0];
+			var btn= document.getElementById("back");
+			div.path=[];
+			
+			div.flag= false;
+			div.onmousedown=function(evt){
+			  evt=evt||window.event;
+				// console.dir(evt.offsetX+" "+evt.offsetY);
+				div.flag=true;
+				div.offx= evt.offsetX;
+				div.offy= evt.offsetY;
+				//div.path=[];  //点击div内的按钮，会对数组进行初始化，所以不能在这复制
+			}
+			document.onmousemove=function(evt){
+				evt=evt||window.event;
+				if(div.flag){
+					// div.style.left=evt.clientX-div.offx+"px";
+					// div.style.top= evt.clientY-div.offy+"px";
+					var left= evt.clientX-div.offx;
+					var top= evt.clientY-div.offy;
+					var maxLeft= document.documentElement.clientWidth- div.offsetWidth;
+					var maxTop =document.documentElement.clientHeight-div.offsetHeight;
+					//console.log("div 宽高："+div.offsetWidth+" "+div.offsetHeight);
+					//console.log(maxLeft+" "+maxTop);
+					if(left<0){
+						left=0;
+					}
+					if(top<0){
+						top=0;
+					}
+					if(left>=maxLeft){
+						left=maxLeft;
+					}
+					if(top>=maxTop){
+						top=maxTop;
+					}
+					
+					div.style.left=left+"px";
+					div.style.top= top+"px";
+				  div.path.push({x:left,y:top});
+				}
+			}
+			document.onmouseup=function(){
+				div.flag=false;
+			}
+			btn.onclick=function(){
+			  // console.dir(path);
+			  //console.log(div.path.length);
+				//这里不能用for循环，因为执行的太快
+				// for(var i=path.length-1;i>=0;i--){
+					// div.style.left=path[i].x+"px";
+					// div.style.top= path[i].y+"px";
+					// console.log(div.style.left);
+				// }
+				var i=0;
+				var t= setInterval(function(){
+					div.style.left=div.path[i].x+"px";
+					div.style.top= div.path[i].y+"px";
+					i++;
+					if(i>=div.path.length){
+						clearInterval(t);
+					}
+				},50);
+			}
+	</script>
+</html>

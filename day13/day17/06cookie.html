@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		  *{
+				padding:0;margin:0;
+			}
+			
+		</style>
+		<script ></script>
+	</head>
+	<body >
+	   
+	</body>
+	<script>
+     // document.cookie="id=10001";
+		 for(var i=0;i<160;i++){
+			 document.cookie="id"+i+"=1001"+i;
+		 }
+		 //取到id72，如何取，document.cookie是一个字符串，切片
+		 // alert(document.cookie);
+		 var str= document.cookie;
+		 document.write(str);
+		 var arr= str.split("; ");
+		 // for(var i=0;i<arr.length;i++){
+			 
+			 // console.log(i+" "+arr[i]);
+		 // }
+		 // alert(arr[62]);//id72=1000172
+		 //通过查看下标查找
+		 /* var str72= arr[62];
+		 //方法1
+		 var n= str72.indexOf("=");
+		 alert(str72.substring(n+1));
+		 //方法2
+		 alert(str72.split("=")[1]); */
+		 
+		 //通过cookie的名字查找
+		 for(var i=0;i<arr.length;i++){
+			 if(arr[i].indexOf("id72")!=-1){
+				 alert(i);
+				 break;
+			 }
+		 }
+	</script>
+</html>

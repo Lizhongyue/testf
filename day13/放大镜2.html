@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#small{width:500px;height:750px;float:left;
+			    background:url(111.JPG) no-repeat;
+			    position:relative;
+			    background-size:cover;
+			    }
+			#big{width:500px;height:750px;float:left;
+			    background:url(111.JPG) ;display:none;}
+			#mask{position:absolute;
+			      left:0;
+			      top:0;
+			      display:none;
+			      cursor: pointer;
+			      background:rgba(255,255,0,0.5);
+			      }
+		</style>
+		<script type="text/javascript">
+		    window.onload=function()
+		    {
+			var small=document.getElementById("small");
+			var big=document.getElementById("big");
+			var mask=document.getElementById("mask");
+			var scale=1624/500;
+			
+			mask.style.width=500/scale+"px";
+			mask.style.height=750/scale+"px";
+			
+			small.onmouseover=function()
+			{
+				mask.style.display="block";
+				big.style.display="block";
+			}
+			small.onmouseout=function()
+			{
+				mask.style.display="none";
+				big.style.display="none";
+			}
+			
+			small.onmousemove=function(evt)
+			{
+				evt=evt||window.event;
+				mask.style.left=evt.clientX-mask.offsetWidth/2+"px";
+				mask.style.top=evt.clientY-mask.offsetHeight/2+"px";
+				var left=evt.clientX-mask.offsetWidth/2;
+				var top=evt.clientY-mask.offsetHeight/2;
+				if(left<0)
+				{
+					left=0;
+				}
+				if(top<0)
+				{
+					top=0;
+				}
+				if(left>=small.offsetWidth-mask.offsetWidth)
+				{
+					left=small.offsetWidth-mask.offsetWidth
+				}
+				if(top>=small.offsetHeight-mask.offsetHeight)
+				{
+					top=small.offsetHeight-mask.offsetHeight;
+				}
+				big.style.backgroundPositionX=-left*scale+"px";
+				big.style.backgroundPositionY=-top*scale+"px";
+			}
+			
+			
+			
+			
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id="small">
+			<div id="mask"></div>
+		</div>
+		<div id="big"></div>
+	</body>
+</html>
+ 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{width:200px;
+			   height:200px;
+			   background:red;
+			   position: absolute;
+			   cursor: pointer;}
+		</style>
+		<script type="text/javascript">
+			/*window.onload=function()
+			{
+				var div=document.getElementsByTagName("div")[0];
+				div.flag=false;
+				div.onmousedown=function(evt)
+				{
+					var eve=evt||event;
+					div.flag=true;
+					div.offx=eve.offsetX;
+					div.offy=eve.offsetY;
+				}
+				document.onmousemove=function(evt)
+				{
+					var eve=evt||event;
+					if(div.flag)
+					{
+						div.style.left=eve.clientX-div.offx+"px";
+						div.style.top=eve.clientY-div.offy+"px";
+					}
+				}
+				document.onmouseup=function()
+				{
+					div.flag=false;
+				}
+			}*/
+			window.onload=function()
+			{
+				var div=document.getElementsByTagName("div")[0];
+				var btn=document.getElementById("back");
+				div.path=[];
+				div.flag=false;
+				div.onmousedown=function(evt)
+				{
+					var evt=evt||window.event;
+					div.flag=true;
+					div.offx=evt.offsetX;
+					div.offy=evt.offsetY;
+					
+				}
+				document.onmousemove=function(evt)
+				{
+					var evt=evt||window.event;
+					if(div.flag)
+					{
+					/*div.style.left=evt.clientX-div.offx+"px";
+					div.style.top=evt.clientY-div.offy+"px";*/
+					var left=evt.clientX-div.offx;
+					var top=evt.clientY-div.offy;
+					var maxleft=document.documentElement.clientWidth-div.offsetWidth;
+					var maxtop=document.documentElement.clientHeight-div.offsetHeight;
+					if(left<0)
+					{
+						left=0;
+					}
+					if(top<0)
+					{
+						top=0;
+					}
+					if(left>=maxleft)
+					{
+						left=maxleft;
+					}
+					if(top>=maxtop)
+					{
+						top=maxtop;
+					}
+					div.style.left=left+"px";
+					div.style.top=top+"px";
+					div.path.push({x:left,y:top});
+					}
+				}
+				document.onmouseup=function()
+				{
+					div.flag=false;
+				}
+				//不能用for循环，因为for循环移动太快，所以用定时器
+				btn.onclick=function()
+				{
+					var i=0;
+					var timer=setInterval(function()
+					{
+						
+						div.style.left=div.path[i].x+"px";
+						div.style.top=div.path[i].y+"px";
+						i++;
+						if(i>=path.length)
+						{
+							clearInterval(timer);
+						}
+					},50)
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="button" value="路径回放" id="back"/>
+		</div>
+	</body>
+</html>

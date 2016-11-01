@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		  *{
+				padding:0;margin:0;
+			}
+		 div{
+		   position:relative;
+			 left:100px;
+			 top:100px;
+			 width:100px;
+			 height:100px;
+			 border:1px solid green;
+		 }
+		</style>
+		<script ></script>
+	</head>
+	<body >
+	   <div id="out">out
+		   <div id="inner">inner</div>
+		 </div>
+		 
+		 <input type="button" value="取消事件" />
+	</body>
+	<script>
+     var div=document.getElementsByTagName("div");
+		 var input=document.getElementsByTagName("input")[0];
+		 // div[0].onclick=function(){
+		   // alert(this.innerHTML);
+		 // }
+		 // div[0].addEventListener("click",fn0,false);
+		 // div[0].onclick=function(){
+		   // alert("I ♥ you!");
+		 // }
+		   if(div[1].addEventListener){
+				 div[1].addEventListener("click",fn1,false);
+				 div[1].addEventListener("click",fn2,false);
+				 div[1].addEventListener("click",fn3,false);
+				 //console.dir(div[1].addEventListener);
+			 }else{
+				 div[1].attachEvent("onclick",fn1);
+				 div[1].attachEvent("onclick",fn2);
+				 div[1].attachEvent("onclick",fn3);
+			 }
+			 
+		 
+		 
+		 input.onclick=function(){
+			 if(div[1].removeEventListener){
+				 div[1].removeEventListener("click",fn2);
+			 }else{
+				 div[1].detachEvent("onclick",fn1);
+			 }
+			 
+			 console.dir(div[1].addEventListener);
+			 alert("ok");
+		 }
+		 
+		 function fn0(){
+			 alert(this.innerHTML);	 
+		 }
+		 function fn1(){
+			 alert("111");	 
+		 }
+		 function fn2(){
+			 alert("I ♥ you!");
+		 }
+		 function fn3(){
+			 alert("3333");
+		 }
+	</script>
+</html>

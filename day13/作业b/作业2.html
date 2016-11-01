@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js1.js"></script>
+		<script type="text/javascript">
+		window.onload=function(){
+			var tex1=document.getElementById("tex1");
+			var btn1=document.getElementById("btn1");
+			btn1.onclick=function(){
+				var d=new Date();
+				d.setDate(d.getDate()+10);
+				document.cookie="step="+tex1.value+";expires="+d;
+			}
+			var arr=document.cookie.split("; ");
+			var n;
+			for(var i=0;i<arr.length;i++){
+				if(arr[i].indexOf("step")!=-1){
+					n=i;
+				}
+			}
+			tex1.value=arr[n].split("=")[1];
+		}
+		</script>
+	</head>
+	<body>
+		用户名：<input type="text" id="tex1"/>
+		<input type="button" id="btn1" value="提交"/>
+	</body>
+</html>
